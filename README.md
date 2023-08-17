@@ -17,3 +17,10 @@ After that, x' and x are paired in concatenation and inserted with trigger terms
 Here HICL can both work for tweets with and without hashtags.
 
 ![Alt text](figure/HICL.png)
+
+Our key contributions:
+1. We propose a novel HICL framework for generic social media NLU in data sparsity, which can retrieve topic-related posts and enrich contexts via gradient-searched trigger terms.
+
+2. We develop the first hashtag-driven pre-trained model, #Encoder, leveraging hashtags to learn inter-post topic relevance (for retrieval) via contrastive learning over 179M tweets.
+
+3. We contribute a large corpus with 45M tweets for retrieval, and the experiments on 7 Twitter benchmarks show that HICL advances the overall results of various trendy NLU models.
