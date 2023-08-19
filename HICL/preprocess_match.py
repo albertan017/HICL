@@ -11,18 +11,15 @@ import copy
 import faiss
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--hash_file',default='./hash_database_feature/tweet_hash_clean_seg_500',type=str)
-# parser.add_argument('--model',default='/work/SimCSE-main/result/thre1000_num1000/',type=str)
-# parser.add_argument('--model_name',default='/work/SimCSE-main/result/thre100_num100_remove/1399999',type=str)
-parser.add_argument('--model_name',default='../lmbff/contrastive_models/one/20_new/',type=str)
+parser.add_argument('--hash_file',default='./hash_database_feature/hash_database',type=str)
+parser.add_argument('--model_name',default='albertan017/hashencoder',type=str)
 parser.add_argument("--max_seq_length", default=128, type=int)
-
 parser.add_argument("--dataset_path", default='../finetune/data/', type=str, required=False, help="dataset name")
 parser.add_argument("--task_name", default='eval-stance,eval-emotion,eval-irony,eval-offensive,eval-hate,sem21-task7-humor,sem22-task6-sarcasm', type=str, required=False, help="dataset name")
 parser.add_argument("--best", default=100, type=int)
 parser.add_argument('--method',default='_seg_500_one20',type=str)
-parser.add_argument("--split", default=50, type=int)#for gpu memory
-parser.add_argument("--hashprocess", default='seg', type=str)#for gpu memory
+parser.add_argument("--split", default=100, type=int)#for gpu memory
+parser.add_argument("--hashprocess", default='same', type=str)#for gpu memory
 parser.add_argument("--gpu", default=8, type=int)#for gpu memory
 
 args = parser.parse_args()
