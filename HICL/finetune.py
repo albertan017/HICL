@@ -77,7 +77,7 @@ def parse_args():
         default='token',
         type=str,
         required=False,
-        help="token data save directory",
+        help="Token data save directory",
     )
     parser.add_argument(
         "--results_name",
@@ -174,7 +174,7 @@ def evaluate(model, data_loader, task='eval-emoji',write_result=''):
     results = classification_report(label_all, pred_all, output_dict=True)
 
         # Emotion (Macro f1)
-    elif 'emotion' in task:
+    if 'emotion' in task:
         tweeteval_result = results['macro avg']['f1-score']
 
         # Hate (Macro f1)
