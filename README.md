@@ -69,5 +69,15 @@ bash run_HICL.sh
 The main comparison results for HICL is shown as below:
 ![Alt text](figure/main_results.png)
 
-# Citation
+# Citation (TODO)
+```
+@misc{HICL,
+      title={Hashtag-Driven In-Context Learning for Social Media Natural Language Understanding}, 
+      author={Hanzhuo Tan, Chunpu Xu, Jing Li, Yuqun Zhang, Zeyang Fang, Zeyu Chen, Baohua Lai},
+      year={2023},
+      eprint={TODO},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+}
+```
 
