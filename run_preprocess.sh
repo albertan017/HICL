@@ -7,7 +7,7 @@ python preprocess_data_token.py \
 python preprocess_extract_feature.py \
   --dataset_path hash_database \
   --model_name albertan017/hashencoder \
-  --save './hash_database_feature/
+  --save ./hash_database_feature/
 
 # Finally we search for the most topic similar tweets from #database
 # --hash_file is the extracted feature embeddings from previous step
