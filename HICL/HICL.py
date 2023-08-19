@@ -1,17 +1,3 @@
-# Copyright (c) 2020 PaddlePaddle Authors. All Rights Reserved.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-
 import argparse
 import logging
 # from transformers.utils import logging
@@ -25,9 +11,6 @@ from functools import partial
 import copy
 import numpy as np
 import datasets
-# import paddle
-# from paddle.io import DataLoader
-
 import torch
 from torch.utils.data import DataLoader
 import transformers
@@ -43,18 +26,12 @@ from transformers import (
     get_scheduler,
     set_seed,
 )
-from accelerate import Accelerator
+
 from tqdm import trange,tqdm
-# from paddle.metric import Metric, Accuracy, Precision, Recall
-# from paddlenlp.data import Stack, Tuple, Pad, Dict
-# from paddlenlp.data.sampler import SamplerHelper
-# from paddlenlp.transformers import LinearDecayWithWarmup
-# from paddlenlp.metrics import AccuracyAndF1, Mcc, PearsonAndSpearman
 
 from sklearn.metrics import f1_score, precision_score, recall_score, accuracy_score, classification_report
 
 import torch.nn as nn
-# import paddle.nn.functional as F
 from transformers.models.roberta.modeling_roberta import RobertaModel, RobertaPreTrainedModel
 
 CONVERT = {
@@ -152,11 +129,10 @@ def parse_args():
     # Required parameters
     parser.add_argument(
         "--task_name",
-        # default='stance,hate,sem-18,sem-17,imp-hate,sem19-task5-hate,sem19-task6-offen,sem22-task6-sarcasm',
         default='eval-stance,eval-emotion,eval-irony,eval-offensive,eval-hate,sem21-task7-humor,sem22-task6-sarcasm',
         type=str,
         required=False,
-        help="The name of the task to train selected in the list: ")
+        help="The name of the task to train")
     parser.add_argument(
         "--model_name_or_path",
         default='vinai/bertweet-base',
@@ -172,24 +148,24 @@ def parse_args():
     )
     parser.add_argument(
         "--input_dir",
-        default='../finetune/data/',
+        default='../data/',
         type=str,
         required=False,
-        help="The output directory where the model predictions and checkpoints will be written.",
+        help="The input directory where the data are stored.",
     )
     parser.add_argument(
         "--method",
-        default='hash_seg_500_one20_top_1',
+        default='hash_hicl_topadd_1',
         type=str,
         required=False,
-        help="The output directory where the model predictions and checkpoints will be written.",
+        help="Token data save directory",
     )
     parser.add_argument(
         "--results_name",
         default='results_ft_retrione20.txt',
         type=str,
         required=False,
-        help="The output directory where the model predictions and checkpoints will be written.",
+        help="Save names for the results.",
     )
     parser.add_argument(
         "--max_seq_length",
@@ -239,7 +215,7 @@ def parse_args():
         # choices=["linear", "cosine", "cosine_with_restarts", "polynomial", "constant", "constant_with_warmup"],
     )
     parser.add_argument(
-        "--num_warmup_steps", type=float, default=0.1, help="Number of steps for the warmup in the lr scheduler."
+        "--num_warmup_steps", type=float, default=0.1, help="Ratio of steps for the warmup in the lr scheduler."
     )
     parser.add_argument(
         "--max_train_steps",
@@ -250,7 +226,7 @@ def parse_args():
     parser.add_argument(
         "--seed", default='0,1,2,3,4,5,6,7,8,9', type=str, help="random seed for initialization")
     parser.add_argument(
-        "--shot", default='full', type=str, help="random seed for initialization")
+        "--shot", default='full', type=str, help="few shot")
     parser.add_argument(
         "--stop", default=5, type=int, help="early stop")
     parser.add_argument(
@@ -258,7 +234,7 @@ def parse_args():
     parser.add_argument(
         "--write_result", default='', type=str, help="weighted loss")
     parser.add_argument(
-        "--template", default='333', type=str, help="trigger words")
+        "--template", default='050', type=str, help="number and place of trigger words")
     parser.add_argument(
         "--save_model", default='', type=str, help="save model")
     args = parser.parse_args()
@@ -287,11 +263,8 @@ def evaluate(model, data_loader, task='eval-emoji',write_result=''):
             f.write('\n')
     results = classification_report(label_all, pred_all, output_dict=True)
 
-    if 'emoji' in task:
-        tweeteval_result = results['macro avg']['f1-score']
-
         # Emotion (Macro f1)
-    elif 'emotion' in task:
+    if 'emotion' in task:
         tweeteval_result = results['macro avg']['f1-score']
 
         # Hate (Macro f1)
@@ -306,10 +279,6 @@ def evaluate(model, data_loader, task='eval-emoji',write_result=''):
     elif 'offensive' in task:
         tweeteval_result = results['macro avg']['f1-score']
 
-        # Sentiment (Macro Recall)
-    elif 'sentiment' in task:
-        tweeteval_result = results['macro avg']['recall']
-
         # Stance (Macro F1 of 'favor' and 'against' classes)
     elif 'stance' in task:
         f1_against = results['1']['f1-score']
@@ -319,7 +288,6 @@ def evaluate(model, data_loader, task='eval-emoji',write_result=''):
         tweeteval_result = results['1']['f1-score']
     elif 'humor' in task:
         tweeteval_result = results['1']['f1-score']
-
 
     print("aveRec:%.5f, f1PN:%.5f, acc: %.5f " % (tweeteval_result, tweeteval_result, tweeteval_result))
     return tweeteval_result,tweeteval_result,tweeteval_result
@@ -358,11 +326,6 @@ def get_template_text(manual_template, tokenizer):
     return template
 
 def do_train(args):
-    # config = AutoConfig.from_pretrained(args.model_name_or_path, num_labels=10)
-    # # tokenizer = AutoTokenizer.from_pretrained(args.model_name_or_path)
-    # model = RobertaForMulti.from_pretrained(
-    #     args.model_name_or_path, config=config).cuda()
-    # set_seed(args.seed)
     print(args)
     data_all = datasets.load_from_disk(args.input_dir)
     label2idx = CONVERT[args.task.split('_')[0]]
@@ -541,12 +504,6 @@ def do_train(args):
                               correct_bias=False)
         num_update_steps_per_epoch = len(train_data_loader)
         args.max_train_steps = args.num_train_epochs * num_update_steps_per_epoch
-        # lr_scheduler = get_scheduler(
-        #     name=args.lr_scheduler_type,
-        #     optimizer=optimizer,
-        #     num_warmup_steps=int(args.num_warmup_steps*args.max_train_steps),
-        #     num_training_steps=args.max_train_steps,
-        # )
 
         loss_fct = nn.CrossEntropyLoss().cuda()
         if args.weight == 1:# or 'sarcasm' in args.task:
