@@ -67,7 +67,7 @@ def parse_args():
     )
     parser.add_argument(
         "--input_dir",
-        default='../finetune/data/',
+        default='../data/',
         type=str,
         required=False,
         help="The input directory where the data are stored.",
@@ -77,7 +77,7 @@ def parse_args():
         default='token',
         type=str,
         required=False,
-        help="The input directory suffix",
+        help="token data save directory",
     )
     parser.add_argument(
         "--results_name",
