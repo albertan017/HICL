@@ -8,12 +8,12 @@ import os
 import numpy as np
 from sklearn.preprocessing import normalize
 parser = argparse.ArgumentParser()
-parser.add_argument("--dataset_path", default='hash_database', type=str, required=False, help="dataset name")
-parser.add_argument("--model_name", default='albertan017/hashencoder', type=str, required=False, help="tokenizer name")
-parser.add_argument("--max_seq_length", default=128, type=int, help="The maximum total input sequence length after tokenization. Sequences longer than this will be truncated, sequences shorter will be padded.")
-parser.add_argument("--batch_size", default=64, type=int, help="The maximum total input sequence length after tokenization. Sequences longer than this will be truncated, sequences shorter will be padded.")
-parser.add_argument("--save", default='./hash_database_feature/', type=str, required=False, help="dataset name")
-parser.add_argument("--split", default=100, type=int, required=False, help="dataset name")
+parser.add_argument("--dataset_path", default='hash_database', type=str, required=False)
+parser.add_argument("--model_name", default='albertan017/hashencoder', type=str, required=False)
+parser.add_argument("--max_seq_length", default=128, type=int)
+parser.add_argument("--batch_size", default=64, type=int)
+parser.add_argument("--save", default='./hash_database_feature/', type=str, required=False)
+parser.add_argument("--split", default=100, type=int, required=False)
 
 args = parser.parse_args()
 
