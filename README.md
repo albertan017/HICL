@@ -36,7 +36,7 @@ Please refer to the official TweetEval sites to download the datasets:
 Stance Detection (SemEval-2016 task 6), Emotion Recognition (SemEval-2018 task 1), Irony Detection (SemEval-2018 task 3), Offensive Language Identification (SemEval-2019 task 6), Hate Speech Detection (SemEval-2019 task 5), Humor detection (SemEval-2021 task 7),Sarcasm Detection (SemEval-2022 task 6).
 
 # #Encoder
-To uese the #Encoder to encode a tweet:
+To encode a tweet with #Encoder:
 ```
 from transformers import AutoModel, AutoTokenizer 
 hashencoder = AutoModel.from_pretrained("albertan017/hashencoder")
