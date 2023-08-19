@@ -11,7 +11,7 @@ parser.add_argument("--output_dir", default='./', type=str, required=False, help
 parser.add_argument("--dataset_path", default='./', type=str, required=False, help="dataset name")
 parser.add_argument("--task_name", default='hash_database', type=str, required=False, help="dataset name")
 parser.add_argument("--use_slow_tokenizer", action="store_true", help="If passed, will use a slow tokenizer (not backed by the 🤗 Tokenizers library).")
-parser.add_argument("--tokenizer_name", default='vinai/bertweet-base', type=str, required=False, help="tokenizer name")
+parser.add_argument("--tokenizer_name", default='albertan017/hashencoder', type=str, required=False, help="tokenizer name")
 parser.add_argument("--max_seq_length", default=128, type=int, help="The maximum total input sequence length after tokenization. Sequences longer than this will be truncated, sequences shorter will be padded.")
 parser.add_argument("--preprocessing_num_workers", default=10, type=int, help="multi-processing number.")
 parser.add_argument("--overwrite_cache", type=bool, default=False, help="Overwrite the cached training and evaluation sets")
