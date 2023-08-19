@@ -52,7 +52,8 @@ with torch.no_grad():
 # Run HICL
 
 # Main Results
-
+The main comparison results for HICL is shown as below:
+![Alt text](figure/main_results.png)
 
 # Citation
 
