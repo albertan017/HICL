@@ -26,9 +26,14 @@ Our key contributions:
 3. We contribute a large corpus with 45M tweets for retrieval, and the experiments on 7 Twitter benchmarks show that HICL advances the overall results of various trendy NLU models.
 
 # Environment
+To run the code, please install the dependency packages by using the following command:
+```
+pip install -r requirements.txt
+```
+# Prepare the Datasets
+Please refer to the official TweetEval sites to download the datasets:
 
-# Datasets
-
+Stance Detection (SemEval-2016 task 6), Emotion Recognition (SemEval-2018 task 1), Irony Detection (SemEval-2018 task 3), Offensive Language Identification (SemEval-2019 task 6), Hate Speech Detection (SemEval-2019 task 5), Humor detection (SemEval-2021 task 7),Sarcasm Detection (SemEval-2022 task 6).
 # Run HICL
 
 # Main Results
