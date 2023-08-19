@@ -7,8 +7,8 @@ import copy
 from accelerate import Accelerator
 #'eval-emoji,eval-emotion,eval-hate,eval-irony,eval-offensive,eval-sentiment,eval-stance/abortion,eval-stance/atheism,eval-stance/climate,eval-stance/feminist,eval-stance/hillary'
 parser = argparse.ArgumentParser()
-parser.add_argument("--output_dir", default='../finetune/data/', type=str, required=False, help="The output directory where the data will be written.")
-parser.add_argument("--dataset_path", default='../finetune/data/', type=str, required=False, help="dataset path")
+parser.add_argument("--output_dir", default='../data/', type=str, required=False, help="The output directory where the data will be written.")
+parser.add_argument("--dataset_path", default='../data/', type=str, required=False, help="dataset path")
 parser.add_argument("--task_name", default='eval-stance,eval-emotion,eval-irony,eval-offensive,eval-hate,sem21-task7-humor,sem22-task6-sarcasm', type=str, required=False, help="dataset name")
 parser.add_argument('--method',default='token',type=str, help="save name")
 parser.add_argument("--tokenizer_name", default='albertan017/hashencoder', type=str, required=False, help="tokenizer name")
