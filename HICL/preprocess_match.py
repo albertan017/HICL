@@ -17,7 +17,7 @@ parser.add_argument("--max_seq_length", default=128, type=int)
 parser.add_argument("--dataset_path", default='../finetune/data/', type=str, required=False, help="dataset name")
 parser.add_argument("--task_name", default='eval-stance,eval-emotion,eval-irony,eval-offensive,eval-hate,sem21-task7-humor,sem22-task6-sarcasm', type=str, required=False, help="dataset name")
 parser.add_argument("--best", default=100, type=int)
-parser.add_argument('--method',default='_seg_500_one20',type=str)
+parser.add_argument('--method',default='_hicl',type=str)
 parser.add_argument("--split", default=100, type=int)#for gpu memory
 parser.add_argument("--hashprocess", default='same', type=str)#for gpu memory
 parser.add_argument("--gpu", default=8, type=int)#for gpu memory
