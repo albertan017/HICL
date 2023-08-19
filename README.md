@@ -50,9 +50,20 @@ with torch.no_grad():
 ```
 
 # Run HICL
-To run the baseline models, please run the bash run_baseline.sh
+To run the baseline models, please run the bash run_baseline.sh:
+```
+bash run_baseline.sh
+```
+
 To run the HICL framework, first please run the data preprocess bash, run_HICL_preproecss.sh, it will search for the most topic-related tweets for the benchmark datasets.
+```
+bash run_HICL_preprocess.sh
+```
+
 Then run the bash, run_HICL.sh to reproduce the main results.
+```
+bash run_HICL.sh
+```
 
 # Main Results
 The main comparison results for HICL is shown as below:
