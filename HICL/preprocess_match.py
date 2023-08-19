@@ -11,7 +11,7 @@ import copy
 import faiss
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--hash_file',default='./tweet_hash_clean_seg_500_one20/tweet_hash_clean_seg_500',type=str)
+parser.add_argument('--hash_file',default='./hash_database_feature/tweet_hash_clean_seg_500',type=str)
 # parser.add_argument('--model',default='/work/SimCSE-main/result/thre1000_num1000/',type=str)
 # parser.add_argument('--model_name',default='/work/SimCSE-main/result/thre100_num100_remove/1399999',type=str)
 parser.add_argument('--model_name',default='../lmbff/contrastive_models/one/20_new/',type=str)
