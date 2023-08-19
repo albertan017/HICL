@@ -61,7 +61,7 @@ def parse_args():
     )
     parser.add_argument(
         "--token_name_or_path",
-        default='albertan017/hashencoder',
+        default='vinai/bertweet-base',
         type=str,
         required=False,
     )
