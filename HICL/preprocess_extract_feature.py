@@ -12,7 +12,7 @@ parser.add_argument("--dataset_path", default='hash_database', type=str, require
 parser.add_argument("--model_name", default='albertan017/hashencoder', type=str, required=False)
 parser.add_argument("--max_seq_length", default=128, type=int)
 parser.add_argument("--batch_size", default=64, type=int)
-parser.add_argument("--save", default='./hash_database_feature/', type=str, required=False)
+parser.add_argument("--save", default='./hash_database_feature/hash_database', type=str, required=False)
 parser.add_argument("--split", default=100, type=int, required=False)
 
 args = parser.parse_args()
@@ -77,7 +77,7 @@ with torch.no_grad():
         progress_bar.update(1)
         if len(samples) >= BATCH or step == len(data_loader)-1:
             embs = normalize(embs)
-            np.savez(args.save+args.dataset_path+'_'+str(BATCH_IDX),embs=embs.astype(np.float16),samples=np.array(samples))
+            np.savez(args.save+'_'+str(BATCH_IDX),embs=embs.astype(np.float16),samples=np.array(samples))
             # with open(args.save+args.dataset_path+'_'+str(BATCH_IDX)+'.txt', 'w',encoding='utf-8') as f:
             #     for line in samples:
             #         f.write(line+ ' \n')
