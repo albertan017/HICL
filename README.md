@@ -35,7 +35,10 @@ Please refer to the official TweetEval sites to download the datasets:
 
 Stance Detection (SemEval-2016 task 6), Emotion Recognition (SemEval-2018 task 1), Irony Detection (SemEval-2018 task 3), Offensive Language Identification (SemEval-2019 task 6), Hate Speech Detection (SemEval-2019 task 5), Humor detection (SemEval-2021 task 7),Sarcasm Detection (SemEval-2022 task 6).
 
-Please convert the data into {TASK}/train.json, {TASK}/dev.json, {TASK}/test.json with the format: {"labels": "0", "text": "text"}
+Please convert the data into {TASK}/train.json, {TASK}/dev.json, {TASK}/test.json with the format: {"labels": "0", "text": "text"}, and place them under "data" folder
+
+# #Database
+We will release the 45M #Database upon publication.
 
 # #Encoder
 To encode a tweet with #Encoder:
