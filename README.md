@@ -75,13 +75,13 @@ The main comparison results for HICL is shown as below:
 # Bugs or Questions
 If you have any questions related to the code or the paper, feel free to email Hanzhuo Tan (hanzhuo.tan@connect.polyu.hk). If you encounter any problems when using the code, or want to report a bug, you can open an issue. Please try to specify the problem with details so we can help you better and quicker!
 
-# Citation (TODO)
+# Citation
 ```
 @misc{HICL,
       title={Hashtag-Driven In-Context Learning for Social Media Natural Language Understanding}, 
       author={Hanzhuo Tan, Chunpu Xu, Jing Li, Yuqun Zhang, Zeyang Fang, Zeyu Chen, Baohua Lai},
       year={2023},
-      eprint={TODO},
+      eprint={2308.09985},
       archivePrefix={arXiv},
       primaryClass={cs.CL}
 }
