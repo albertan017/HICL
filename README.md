@@ -79,7 +79,7 @@ If you have any questions related to the code or the paper, feel free to email H
 ```
 @misc{HICL,
       title={Hashtag-Driven In-Context Learning for Social Media Natural Language Understanding}, 
-      author={Hanzhuo Tan, Chunpu Xu, Jing Li, Yuqun Zhang, Zeyang Fang, Zeyu Chen, Baohua Lai},
+      author={Hanzhuo Tan and Chunpu Xu and Jing Li and Yuqun Zhang and Zeyang Fang and Zeyu Chen and Baohua Lai},
       year={2023},
       eprint={2308.09985},
       archivePrefix={arXiv},
