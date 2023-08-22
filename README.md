@@ -77,8 +77,8 @@ If you have any questions related to the code or the paper, feel free to email H
 
 # Citation
 ```
-@misc{HICL,
-      title={Hashtag-Driven In-Context Learning for Social Media Natural Language Understanding}, 
+@misc{tan2023hicl,
+      title={HICL: Hashtag-Driven In-Context Learning for Social Media Natural Language Understanding}, 
       author={Hanzhuo Tan and Chunpu Xu and Jing Li and Yuqun Zhang and Zeyang Fang and Zeyu Chen and Baohua Lai},
       year={2023},
       eprint={2308.09985},
